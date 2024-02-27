@@ -65,6 +65,26 @@ const Header = () => {
     setIsLoggedIn(false);
   };
 
+  const [data, setData] = useState([]);
+  const [searchValue, setSearchValue] = useState("");
+
+  const handleChange = (event) => {
+    setSearchValue(event.target.value);
+  };
+
+  const handleKeyDown = (event) => {
+    if (event.key === "Enter") {
+      // console.log("Search value:", searchValue);
+      fetch(
+        `https://bazaar-buzz.onrender.com/product/products/?search=${searchValue}`
+      )
+        .then((res) => res.json())
+        .then((data) => {
+          setData(data);
+        });
+    }
+  };
+
   return (
     <div>
       <nav className="navbar navbar-expand-lg">
@@ -86,7 +106,7 @@ const Header = () => {
           <div className="collapse navbar-collapse" id="navbarSupportedContent">
             <ul className="navbar-nav me-auto mb-2 mb-lg-0 w-100 d-flex justify-content-center">
               <div className="w-75 mt-3">
-                <form className="d-flex w-80" role="search">
+                <div className="d-flex w-80" role="search">
                   <div className="input-group mb-3">
                     <span
                       className="input-group-text rounded-start-pill"
@@ -95,11 +115,15 @@ const Header = () => {
                       <i className="bi bi-search"></i>
                     </span>
                     <input
+                      value={searchValue}
+                      onChange={handleChange}
+                      onKeyDown={handleKeyDown}
                       type="text"
                       className="form-control"
                       aria-label="Text input with dropdown button"
                       placeholder="Searching for..."
                     />
+
                     <button
                       className="btn btn-outline-secondary dropdown-toggle rounded-end-pill"
                       type="button"
@@ -110,15 +134,39 @@ const Header = () => {
                     </button>
                     <ul className="dropdown-menu dropdown-menu-end">
                       {categories.map((category) => (
-                        <li key={category.id}>
-                          <a className="dropdown-item" href="#">
-                            {category.name}
-                          </a>
-                        </li>
+                        <Link
+                          style={{ textDecoration: "none" }}
+                          to={`/allProducts/${category.name}`}
+                          key={category.id}
+                        >
+                          <li>
+                            <a className="dropdown-item" href="#">
+                              {category.name}
+                            </a>
+                          </li>
+                        </Link>
                       ))}
                     </ul>
                   </div>
-                </form>
+                </div>
+
+                <div style={{}}>
+                  <div style={{}}>
+                    <ol className="list-group list-group-numbered">
+                      {data.map((product) => (
+                        <li key={product.id} className="list-group-item">
+                          <Link
+                            style={{ textDecoration: "none" }}
+                            className="text-dark"
+                            to={`/products/${product.id}`}
+                          >
+                            {product.name}
+                          </Link>
+                        </li>
+                      ))}
+                    </ol>
+                  </div>
+                </div>
               </div>
             </ul>
             <div className="d-flex align-items-center">
@@ -169,6 +217,15 @@ const Header = () => {
           </div>
         </div>
       </nav>
+      <div className="container mb-4  ">
+        <Link
+          className="p-3 rounded text-dark"
+          style={{ backgroundColor: "#E9ECEF", textDecoration: "none" }}
+          to={`/allProducts/${"All"}`}
+        >
+          All Products
+        </Link>
+      </div>
     </div>
   );
 };

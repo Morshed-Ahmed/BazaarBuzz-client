@@ -81,9 +81,11 @@ const Cart = () => {
             </div>
           ) : (
             <div>
-              <button disabled className="btn btn-danger">
-                Checkout Now ${totalPrice}
-              </button>
+              <Link to={"/login/"}>
+                <button className="btn btn-danger">
+                  Please Login Then Checkout ${totalPrice}
+                </button>
+              </Link>
             </div>
           )}
         </div>

@@ -1,3 +1,5 @@
+import { Link } from "react-router-dom";
+
 const Banner = () => {
   return (
     <div>
@@ -42,12 +44,19 @@ const Banner = () => {
                     quae
                   </p>
                   <div>
-                    <button
-                      type="button"
-                      className="btn btn-danger px-5 py-2 d-inline"
+                    <Link
+                      style={{
+                        textDecoration: "none",
+                      }}
+                      to={`/allProducts/${"All"}`}
                     >
-                      Shop Now
-                    </button>
+                      <button
+                        type="button"
+                        className="btn btn-danger px-5 py-2 d-inline"
+                      >
+                        Shop Now
+                      </button>
+                    </Link>
                   </div>
                 </div>
                 <div className="col-md-6">

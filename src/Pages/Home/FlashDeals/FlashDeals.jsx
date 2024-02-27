@@ -9,11 +9,16 @@ const FlashDeals = () => {
     const storedCart = localStorage.getItem("cart");
     return storedCart ? JSON.parse(storedCart) : [];
   });
+  const [loading, setLoading] = useState(false);
 
   useEffect(() => {
+    setLoading(true);
     fetch("https://bazaar-buzz.onrender.com/product/products/")
       .then((response) => response.json())
-      .then((data) => setProducts(data))
+      .then((data) => {
+        setProducts(data);
+        setLoading(false);
+      })
       .catch((error) => console.error("Error fetching products:", error));
   }, []);
 
@@ -64,6 +69,15 @@ const FlashDeals = () => {
     <div className="my-5">
       <div>
         <h4> Flash Deals </h4>
+        {loading && (
+          <>
+            <div className="d-flex justify-content-center">
+              <div className="spinner-border" role="status">
+                <span className="visually-hidden">Loading...</span>
+              </div>
+            </div>
+          </>
+        )}
         <Slider {...settings} className="m-3">
           {products.map((product) => (
             <div key={product.id}>
