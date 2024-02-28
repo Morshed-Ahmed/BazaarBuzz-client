@@ -66,84 +66,90 @@ function SignUp() {
   };
 
   return (
-    <div>
-      <div className="w-50 mx-auto">
-        <h1 className="text-center mb-5">Sign Up</h1>
-        {success && <p className="text-success">{success}</p>}
-        {error && <p className="text-danger">{error}</p>}
-        <Form onSubmit={handleSubmit}>
-          <Form.Group className="mb-3" controlId="username">
-            <Form.Label>Username</Form.Label>
-            <Form.Control
-              required
-              value={username}
-              onChange={(e) => setUsername(e.target.value)}
-              type="text"
-              placeholder="Enter Username"
-            />
-          </Form.Group>
-          <Form.Group className="mb-3" controlId="firstName">
-            <Form.Label>First Name</Form.Label>
-            <Form.Control
-              required
-              value={firstName}
-              onChange={(e) => setFirstName(e.target.value)}
-              type="text"
-              placeholder="Enter First Name"
-            />
-          </Form.Group>
-          <Form.Group className="mb-3" controlId="lastName">
-            <Form.Label>Last Name</Form.Label>
-            <Form.Control
-              required
-              value={lastName}
-              onChange={(e) => setLastName(e.target.value)}
-              type="text"
-              placeholder="Enter Last Name"
-            />
-          </Form.Group>
+    <div className="container my-5">
+      <div className="w-50 mx-auto  card">
+        <div className="card-body">
+          <div className="text-center">
+            <i className="bi bi-bank2 fs-3"></i>
+            <h4 className="text-center mb-5">Welcome To BazaarBuzz</h4>
+          </div>
+          {success && <p className="text-success">{success}</p>}
+          {error && <p className="text-danger">{error}</p>}
+          <Form onSubmit={handleSubmit}>
+            <Form.Group className="mb-3" controlId="username">
+              <Form.Label>Username</Form.Label>
+              <Form.Control
+                required
+                value={username}
+                onChange={(e) => setUsername(e.target.value)}
+                type="text"
+                placeholder="Enter Username"
+              />
+            </Form.Group>
+            <Form.Group className="mb-3" controlId="firstName">
+              <Form.Label>First Name</Form.Label>
+              <Form.Control
+                required
+                value={firstName}
+                onChange={(e) => setFirstName(e.target.value)}
+                type="text"
+                placeholder="Enter First Name"
+              />
+            </Form.Group>
+            <Form.Group className="mb-3" controlId="lastName">
+              <Form.Label>Last Name</Form.Label>
+              <Form.Control
+                required
+                value={lastName}
+                onChange={(e) => setLastName(e.target.value)}
+                type="text"
+                placeholder="Enter Last Name"
+              />
+            </Form.Group>
 
-          <Form.Group className="mb-3" controlId="email">
-            <Form.Label>Email</Form.Label>
-            <Form.Control
-              required
-              value={email}
-              onChange={(e) => setEmail(e.target.value)}
-              type="email"
-              placeholder="Enter Email"
-            />
-          </Form.Group>
+            <Form.Group className="mb-3" controlId="email">
+              <Form.Label>Email</Form.Label>
+              <Form.Control
+                required
+                value={email}
+                onChange={(e) => setEmail(e.target.value)}
+                type="email"
+                placeholder="Enter Email"
+              />
+            </Form.Group>
 
-          <Form.Group className="mb-3" controlId="password">
-            <Form.Label>Password</Form.Label>
-            <Form.Control
-              value={password}
-              onChange={(e) => setPassword(e.target.value)}
-              required
-              type="password"
-              placeholder="Password"
-            />
-          </Form.Group>
+            <Form.Group className="mb-3" controlId="password">
+              <Form.Label>Password</Form.Label>
+              <Form.Control
+                value={password}
+                onChange={(e) => setPassword(e.target.value)}
+                required
+                type="password"
+                placeholder="Password"
+              />
+            </Form.Group>
 
-          <Form.Group className="mb-3" controlId="confirmPassword">
-            <Form.Label>Confirm Password</Form.Label>
-            <Form.Control
-              value={confirmPassword}
-              onChange={(e) => setConfirmPassword(e.target.value)}
-              required
-              type="password"
-              placeholder="Confirm Password"
-            />
-          </Form.Group>
+            <Form.Group className="mb-3" controlId="confirmPassword">
+              <Form.Label>Confirm Password</Form.Label>
+              <Form.Control
+                value={confirmPassword}
+                onChange={(e) => setConfirmPassword(e.target.value)}
+                required
+                type="password"
+                placeholder="Confirm Password"
+              />
+            </Form.Group>
+            <div className="d-grid ">
+              <Button variant="danger" type="submit" disabled={loading}>
+                {loading ? "Sign Up..." : "Sign Up"}
+              </Button>
+            </div>
+          </Form>
 
-          <Button variant="primary" type="submit" disabled={loading}>
-            {loading ? "Sign Up..." : "Sign Up"}
-          </Button>
-        </Form>
-
-        <p className="mt-3">
-          Already have an account? <Link to={"/login/"}> Login</Link>
-        </p>
+          <p className="mt-3">
+            Already have an account? <Link to={"/login/"}> Login</Link>
+          </p>
+        </div>
       </div>
     </div>
   );

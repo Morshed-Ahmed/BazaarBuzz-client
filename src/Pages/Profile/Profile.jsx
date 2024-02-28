@@ -27,9 +27,9 @@ const Profile = () => {
 
   return (
     <div className="container my-5">
-      <div className="card mb-3">
+      <div className="card mb-3 w-50 mx-auto">
         <div className="card-body">
-          <h4>Personal Information</h4>
+          <h4 className="text-center">Personal Information</h4>
           <h5>Username</h5>
           <p>
             {user.first_name} {user.last_name}
@@ -41,21 +41,23 @@ const Profile = () => {
       <div className="card">
         <div className="card-body">
           <h4>Order Lists</h4>
-          {payProducts.map((i) => (
-            <div className="card" key={i.id}>
-              <div className="card-body">
-                <h6>Transaction Id: {i.transaction_id}</h6>
-                <p>{i.price}</p>
-                <span>{i.date}</span>
-
-                {/* {payProductsItem.map((l, index) => (
-                  <div key={index}>
-                    <p>{l.name}</p>
+          {payProducts.length > 0 ? (
+            <>
+              {payProducts.map((i) => (
+                <div className="card" key={i.id}>
+                  <div className="card-body">
+                    <h6>Transaction Id: {i.transaction_id}</h6>
+                    <p>{i.price}</p>
+                    <span>{i.date}</span>
                   </div>
-                ))} */}
-              </div>
-            </div>
-          ))}
+                </div>
+              ))}
+            </>
+          ) : (
+            <>
+              <p>Empty</p>
+            </>
+          )}
         </div>
       </div>
     </div>

@@ -90,6 +90,7 @@ const Header = () => {
       <nav className="navbar navbar-expand-lg">
         <div className="container">
           <Link className="navbar-brand" to={"/"}>
+            <i className="bi bi-bank2 me-1"></i>
             BazaarBuzz
           </Link>
           <button

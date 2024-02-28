@@ -2,6 +2,7 @@ import { useState } from "react";
 import { Button, Form } from "react-bootstrap";
 import { Link } from "react-router-dom";
 import { useAuth } from "../../Context/AuthContext";
+import toast from "react-hot-toast";
 
 function Login() {
   const [username, setUsername] = useState("");
@@ -34,6 +35,7 @@ function Login() {
 
       const responseData = await response.json();
       const authToken = responseData.token;
+      console.log(responseData);
 
       localStorage.setItem("token", authToken);
       localStorage.setItem("user_id", responseData.user_id);
@@ -42,7 +44,8 @@ function Login() {
       setPassword("");
       setIsLoggedIn(true);
       window.location.href = "/profile";
-      alert("Login successful");
+      // alert("Login successful");
+      toast.success("Login successful");
     } catch (error) {
       setError(error.message);
     }
@@ -71,41 +74,48 @@ function Login() {
   // };
 
   return (
-    <div>
-      <div className="w-50 mx-auto">
-        <h1 className="text-center mb-5">Sign In</h1>
-        {error && <p className="text-danger">{error}</p>}
-        <Form onSubmit={handleSubmit}>
-          <Form.Group className="mb-3" controlId="username">
-            <Form.Label>Username</Form.Label>
-            <Form.Control
-              required
-              value={username}
-              onChange={(e) => setUsername(e.target.value)}
-              type="text"
-              placeholder="Enter Username"
-            />
-          </Form.Group>
+    <div className="my-5 container">
+      <div className="card w-50 mx-auto">
+        <div className="card-body">
+          <div className="text-center">
+            <i className="bi bi-bank2 fs-3"></i>
+            <h4 className="text-center mb-5">Welcome To BazaarBuzz</h4>
+          </div>
 
-          <Form.Group className="mb-3" controlId="password">
-            <Form.Label>Password</Form.Label>
-            <Form.Control
-              value={password}
-              onChange={(e) => setPassword(e.target.value)}
-              required
-              type="password"
-              placeholder="Password"
-            />
-          </Form.Group>
+          {error && <p className="text-danger">{error}</p>}
+          <Form onSubmit={handleSubmit}>
+            <Form.Group className="mb-3" controlId="username">
+              <Form.Label>Username</Form.Label>
+              <Form.Control
+                required
+                value={username}
+                onChange={(e) => setUsername(e.target.value)}
+                type="text"
+                placeholder="Enter Username"
+              />
+            </Form.Group>
 
-          <Button variant="primary" type="submit" disabled={loading}>
-            {loading ? "Logging in..." : "Login"}
-          </Button>
-        </Form>
+            <Form.Group className="mb-3" controlId="password">
+              <Form.Label>Password</Form.Label>
+              <Form.Control
+                value={password}
+                onChange={(e) => setPassword(e.target.value)}
+                required
+                type="password"
+                placeholder="Password"
+              />
+            </Form.Group>
+            <div className="d-grid ">
+              <Button variant="danger" type="submit" disabled={loading}>
+                {loading ? "Logging in..." : "Login"}
+              </Button>
+            </div>
+          </Form>
 
-        <p className="mt-3">
-          {"Don't"} have account? <Link to={"/signup/"}> Sign up </Link>
-        </p>
+          <p className="mt-3">
+            {"Don't"} have account? <Link to={"/signup/"}> Sign up </Link>
+          </p>
+        </div>
       </div>
     </div>
   );

@@ -39,9 +39,8 @@ const Banner = () => {
                 <div className="col-md-6 d-flex flex-column justify-content-center">
                   <h1>50% Off For Your First Shopping</h1>
                   <p>
-                    Lorem ipsum dolor sit amet consectetur adipisicing elit.
-                    Temporibus, quaerat at! Accusantium pariatur debitis saepe
-                    quae
+                    High-quality, durable, and stylish product. Perfect for
+                    everyday use. Limited offer, dont miss out!
                   </p>
                   <div>
                     <Link
@@ -73,17 +72,23 @@ const Banner = () => {
                 <div className="col-md-6 d-flex flex-column justify-content-center">
                   <h1>50% Off For Your First Shopping</h1>
                   <p>
-                    Lorem ipsum dolor sit amet consectetur adipisicing elit.
-                    Temporibus, quaerat at! Accusantium pariatur debitis saepe
-                    quae
+                    High-quality, durable, and stylish product. Perfect for
+                    everyday use. Limited offer, dont miss out!
                   </p>
                   <div>
-                    <button
-                      type="button"
-                      className="btn btn-danger px-5 py-2 d-inline"
+                    <Link
+                      style={{
+                        textDecoration: "none",
+                      }}
+                      to={`/allProducts/${"All"}`}
                     >
-                      Shop Now
-                    </button>
+                      <button
+                        type="button"
+                        className="btn btn-danger px-5 py-2 d-inline"
+                      >
+                        Shop Now
+                      </button>
+                    </Link>
                   </div>
                 </div>
                 <div className="col-md-6">
@@ -100,17 +105,23 @@ const Banner = () => {
                 <div className="col-md-6 d-flex flex-column justify-content-center">
                   <h1>50% Off For Your First Shopping</h1>
                   <p>
-                    Lorem ipsum dolor sit amet consectetur adipisicing elit.
-                    Temporibus, quaerat at! Accusantium pariatur debitis saepe
-                    quae
+                    High-quality, durable, and stylish product. Perfect for
+                    everyday use. Limited offer, dont miss out!
                   </p>
                   <div>
-                    <button
-                      type="button"
-                      className="btn btn-danger px-5 py-2 d-inline"
+                    <Link
+                      style={{
+                        textDecoration: "none",
+                      }}
+                      to={`/allProducts/${"All"}`}
                     >
-                      Shop Now
-                    </button>
+                      <button
+                        type="button"
+                        className="btn btn-danger px-5 py-2 d-inline"
+                      >
+                        Shop Now
+                      </button>
+                    </Link>
                   </div>
                 </div>
                 <div className="col-md-6">

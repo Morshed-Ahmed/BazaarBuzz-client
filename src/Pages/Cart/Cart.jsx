@@ -2,6 +2,7 @@ import { useState } from "react";
 import { useEffect } from "react";
 import { Link } from "react-router-dom";
 import { useAuth } from "../../Context/AuthContext";
+import toast from "react-hot-toast";
 
 const Cart = () => {
   const [cartItems, setCartItems] = useState([]);
@@ -18,6 +19,7 @@ const Cart = () => {
     newCartItems.splice(index, 1);
     setCartItems(newCartItems);
     updateLocalStorage(newCartItems);
+    toast.success("Remove card product");
   };
 
   const updateLocalStorage = (items) => {
