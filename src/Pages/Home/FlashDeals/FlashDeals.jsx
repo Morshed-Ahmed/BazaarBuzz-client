@@ -2,6 +2,7 @@ import Slider from "react-slick";
 import "./FlashDeals.css";
 import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
+import toast from "react-hot-toast";
 
 const FlashDeals = () => {
   const [products, setProducts] = useState([]);
@@ -28,7 +29,7 @@ const FlashDeals = () => {
 
   const addToCart = (product) => {
     setCartItems([...cartItems, product]);
-    alert("Product added to cart!");
+    toast.success("Product added to cart!");
   };
 
   var settings = {

@@ -1,5 +1,6 @@
 import { useState } from "react";
 import { Button, Form } from "react-bootstrap";
+import toast from "react-hot-toast";
 import { Link } from "react-router-dom";
 
 function SignUp() {
@@ -58,6 +59,9 @@ function SignUp() {
       setPassword("");
       setConfirmPassword("");
       // console.log("Registration successful");
+      toast.success(
+        "Registration successful, Check your mail for confirmation"
+      );
     } catch (error) {
       setError(error.message);
     }

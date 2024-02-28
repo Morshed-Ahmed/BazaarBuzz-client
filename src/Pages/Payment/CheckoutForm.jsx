@@ -2,6 +2,7 @@ import { CardElement, useElements, useStripe } from "@stripe/react-stripe-js";
 import axios from "axios";
 import { useEffect } from "react";
 import { useState } from "react";
+import toast from "react-hot-toast";
 
 const CheckoutForm = () => {
   const [error, setError] = useState("");
@@ -81,6 +82,7 @@ const CheckoutForm = () => {
     } else {
       console.log(paymentIntent);
       if (paymentIntent.status === "succeeded") {
+        toast.success("Payment Successfully");
         setSuccess("Payment Successfully");
         console.log("transaction Id", paymentIntent.id);
         setTransactionId(paymentIntent.id);

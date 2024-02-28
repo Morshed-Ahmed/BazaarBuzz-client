@@ -1,4 +1,5 @@
 import { useEffect, useState } from "react";
+import toast from "react-hot-toast";
 import { useParams } from "react-router-dom";
 
 const ProductDetails = () => {
@@ -22,7 +23,7 @@ const ProductDetails = () => {
 
   const addToCart = (product) => {
     setCartItems([...cartItems, product]);
-    alert("Product added to cart!");
+    toast.success("Product added to cart!");
   };
 
   return (
