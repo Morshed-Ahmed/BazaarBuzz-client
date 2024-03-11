@@ -15,7 +15,7 @@ const Checkout = () => {
   }, []);
 
   const totalPrice = cartItems.reduce(
-    (total, item) => total + parseFloat(item.price),
+    (total, item) => total + parseFloat(item.price) * item.quantity,
     0
   );
 
@@ -39,7 +39,6 @@ const Checkout = () => {
   });
 
   useEffect(() => {
-    // Once user data is fetched, update email in formData
     if (!loadingUser && user && user.email) {
       setFormData((prevFormData) => ({
         ...prevFormData,

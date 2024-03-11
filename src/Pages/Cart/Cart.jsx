@@ -11,15 +11,31 @@ const Cart = () => {
     const storedCart = localStorage.getItem("cart");
     if (storedCart) {
       setCartItems(JSON.parse(storedCart));
+      // console.log(JSON.parse(storedCart));
     }
   }, []);
 
+  // const removeFromCart = (index) => {
+  //   const newCartItems = [...cartItems];
+  //   newCartItems.splice(index, 1);
+  //   setCartItems(newCartItems);
+  //   updateLocalStorage(newCartItems);
+  //   toast.success("Remove card product");
+  // };
+
   const removeFromCart = (index) => {
     const newCartItems = [...cartItems];
-    newCartItems.splice(index, 1);
+    const itemToRemove = newCartItems[index];
+
+    if (itemToRemove.quantity > 1) {
+      newCartItems[index].quantity -= 1;
+    } else {
+      newCartItems.splice(index, 1);
+    }
+
     setCartItems(newCartItems);
     updateLocalStorage(newCartItems);
-    toast.success("Remove card product");
+    toast.success("Product quantity updated in cart");
   };
 
   const updateLocalStorage = (items) => {
@@ -27,7 +43,7 @@ const Cart = () => {
   };
 
   const totalPrice = cartItems.reduce(
-    (total, item) => total + parseFloat(item.price),
+    (total, item) => total + parseFloat(item.price) * item.quantity,
     0
   );
 
@@ -60,6 +76,7 @@ const Cart = () => {
                       <h5>{item.name}</h5>
                       <p>{item.description}</p>
                       <p> ${item.price}</p>
+                      <h6>Quantity: {item.quantity}</h6>
                       <button
                         className="btn btn-danger"
                         onClick={() => removeFromCart(index)}

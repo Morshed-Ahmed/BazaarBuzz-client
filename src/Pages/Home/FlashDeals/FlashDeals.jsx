@@ -27,9 +27,25 @@ const FlashDeals = () => {
     localStorage.setItem("cart", JSON.stringify(cartItems));
   }, [cartItems]);
 
+  // const addToCart = (product) => {
+  //   setCartItems([...cartItems, product]);
+  //   toast.success("Product added to cart!");
+  // };
+
   const addToCart = (product) => {
-    setCartItems([...cartItems, product]);
-    toast.success("Product added to cart!");
+    const existingProductIndex = cartItems.findIndex(
+      (item) => item.id === product.id
+    );
+
+    if (existingProductIndex !== -1) {
+      const updatedCart = [...cartItems];
+      updatedCart[existingProductIndex].quantity += 1;
+      setCartItems(updatedCart);
+      toast.success("Product quantity increased in cart!");
+    } else {
+      setCartItems([...cartItems, { ...product, quantity: 1 }]);
+      toast.success("Product added to cart!");
+    }
   };
 
   var settings = {

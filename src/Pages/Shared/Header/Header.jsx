@@ -142,9 +142,9 @@ const Header = () => {
                         key={category.id}
                       >
                         <li>
-                          <a className="dropdown-item" href="#">
+                          <span className="dropdown-item" href="#">
                             {category.name}
-                          </a>
+                          </span>
                         </li>
                       </Link>
                     ))}

@@ -7,7 +7,7 @@ const Delivery = () => {
             <i className="bi bi-truck  fs-2"></i>
             <div className="card-body">
               <h5 className="card-title">Worldwide Delivery</h5>
-              <p className="card-text">
+              <p className="card-text text-secondary">
                 We offer competitive prices on our 100 million plus product any
                 range.
               </p>
@@ -19,7 +19,7 @@ const Delivery = () => {
             <i className="bi bi-stripe  fs-2"></i>
             <div className="card-body">
               <h5 className="card-title">Safe Payment</h5>
-              <p className="card-text">
+              <p className="card-text text-secondary">
                 We offer competitive prices on our 100 million plus product any
                 range.
               </p>
@@ -31,7 +31,7 @@ const Delivery = () => {
             <i className="bi bi-emoji-surprise  fs-2"></i>
             <div className="card-body">
               <h5 className="card-title">Shop With Confidence</h5>
-              <p className="card-text">
+              <p className="card-text text-secondary">
                 We offer competitive prices on our 100 million plus product any
                 range.
               </p>
@@ -43,7 +43,7 @@ const Delivery = () => {
             <i className="bi bi-person-raised-hand    fs-2"></i>
             <div className="card-body">
               <h5 className="card-title">24/7 Support</h5>
-              <p className="card-text">
+              <p className="card-text text-secondary">
                 We offer competitive prices on our 100 million plus product any
                 range.
               </p>

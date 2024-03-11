@@ -2,17 +2,18 @@ import { useEffect, useState } from "react";
 import toast from "react-hot-toast";
 import { Link } from "react-router-dom";
 
-const MobilePhones = () => {
-  const [data, setData] = useState([]);
+const RelatedProducts = ({ products }) => {
+  const [datas, setDatas] = useState([]);
+
   useEffect(() => {
     fetch(
-      "https://bazaar-buzz.onrender.com/product/products/?top_category=Phone"
+      `https://bazaar-buzz.onrender.com/product/products/?top_category=${products.top_category}`
     )
       .then((res) => res.json())
       .then((data) => {
-        setData(data);
+        setDatas(data);
       });
-  });
+  }, [products.top_category]);
 
   const [cartItems, setCartItems] = useState(() => {
     const storedCart = localStorage.getItem("cart");
@@ -22,12 +23,6 @@ const MobilePhones = () => {
   useEffect(() => {
     localStorage.setItem("cart", JSON.stringify(cartItems));
   }, [cartItems]);
-
-  // const addToCart = (product) => {
-  //   setCartItems([...cartItems, product]);
-  //   // alert("Product added to cart!");
-  //   toast.success("Product added to cart!");
-  // };
 
   const addToCart = (product) => {
     const existingProductIndex = cartItems.findIndex(
@@ -44,12 +39,11 @@ const MobilePhones = () => {
       toast.success("Product added to cart!");
     }
   };
-
   return (
-    <div>
-      <h4>Mobile Phones</h4>
-      <div className="row row-cols-1 row-cols-md-3 g-4">
-        {data.map((product) => (
+    <div className="py-5">
+      <h5>Related Products</h5>
+      <div className="row row-cols-1 row-cols-md-4 g-4">
+        {datas.map((product) => (
           <div className="col" key={product.id}>
             <div>
               <div className="p-1">
@@ -99,4 +93,4 @@ const MobilePhones = () => {
   );
 };
 
-export default MobilePhones;
+export default RelatedProducts;
