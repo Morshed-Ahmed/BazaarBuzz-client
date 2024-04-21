@@ -19,7 +19,7 @@ const CheckoutForm = () => {
   }, []);
 
   const totalPrice = cartItems.reduce(
-    (total, item) => total + parseFloat(item.price),
+    (total, item) => total + parseFloat(item.price) * item.quantity,
     0
   );
 
@@ -62,7 +62,7 @@ const CheckoutForm = () => {
     if (error) {
       setError(error.message);
     } else {
-      console.log("[PaymentMethod]", paymentMethod);
+      // console.log("[PaymentMethod]", paymentMethod);
       setError("");
     }
 
@@ -84,7 +84,7 @@ const CheckoutForm = () => {
       if (paymentIntent.status === "succeeded") {
         toast.success("Payment Successfully");
         setSuccess("Payment Successfully");
-        console.log("transaction Id", paymentIntent.id);
+        // console.log("transaction Id", paymentIntent.id);
         setTransactionId(paymentIntent.id);
         const payment = {
           email: user.email,
@@ -99,7 +99,8 @@ const CheckoutForm = () => {
             "https://bazaar-buzz.onrender.com/pay/payments/",
             payment
           );
-          console.log("Payment created successfully:", response.data);
+          // console.log("Payment created successfully:", response.data);
+
           // Optionally handle success response
         } catch (error) {
           console.error("Error creating payment:", error);
