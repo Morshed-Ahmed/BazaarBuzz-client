@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import { Card, Col, Row } from "react-bootstrap";
 import { Link } from "react-router-dom";
+import "./Categories.css";
 
 const Categories = () => {
   const [categories, setCategories] = useState([]);
@@ -37,7 +38,7 @@ const Categories = () => {
             key={category.id}
           >
             <Col>
-              <Card>
+              <Card className="border-0 category-card">
                 <Card.Body className="d-flex justify-content-center align-items-center">
                   <div>
                     <Card.Img

@@ -3,7 +3,7 @@ const Delivery = () => {
     <div>
       <div className="row row-cols-1 row-cols-md-4 g-4">
         <div className="col">
-          <div className="card text-center">
+          <div className="card text-center border-0">
             <i className="bi bi-truck  fs-2"></i>
             <div className="card-body">
               <h5 className="card-title">Worldwide Delivery</h5>
@@ -15,7 +15,7 @@ const Delivery = () => {
           </div>
         </div>
         <div className="col">
-          <div className="card text-center">
+          <div className="card text-center border-0">
             <i className="bi bi-stripe  fs-2"></i>
             <div className="card-body">
               <h5 className="card-title">Safe Payment</h5>
@@ -27,7 +27,7 @@ const Delivery = () => {
           </div>
         </div>
         <div className="col">
-          <div className="card text-center">
+          <div className="card text-center border-0">
             <i className="bi bi-emoji-surprise  fs-2"></i>
             <div className="card-body">
               <h5 className="card-title">Shop With Confidence</h5>
@@ -39,7 +39,7 @@ const Delivery = () => {
           </div>
         </div>
         <div className="col">
-          <div className="card text-center">
+          <div className="card text-center border-0">
             <i className="bi bi-person-raised-hand    fs-2"></i>
             <div className="card-body">
               <h5 className="card-title">24/7 Support</h5>

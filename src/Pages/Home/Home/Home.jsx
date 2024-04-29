@@ -27,7 +27,7 @@ const Home = () => {
   return (
     <div>
       <div className="app">
-        <Modal show={showModal} onHide={handleCloseModal} centered>
+        <Modal show={showModal} onHide={handleCloseModal} centered modal-lg>
           <Modal.Header closeButton></Modal.Header>
           <div className="row">
             <div className="col-md-5">

@@ -130,7 +130,7 @@ const FlashDeals = () => {
 
                         <i
                           onClick={() => addToCart(product)}
-                          className="bi bi-plus-square fs-5 text-danger btn "
+                          className="bi bi-plus-square fs-5 text-danger btn add-to-cart-icon"
                         ></i>
                       </div>
                     </div>

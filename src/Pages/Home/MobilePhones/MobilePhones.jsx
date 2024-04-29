@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import toast from "react-hot-toast";
 import { Link } from "react-router-dom";
+import "./MobilePhones.css";
 
 const MobilePhones = () => {
   const [data, setData] = useState([]);
@@ -50,11 +51,14 @@ const MobilePhones = () => {
       <h4>Mobile Phones</h4>
       <div className="row row-cols-1 row-cols-md-3 g-4">
         {data.map((product) => (
-          <div className="col" key={product.id}>
+          <div className="col " key={product.id}>
             <div>
               <div className="p-1">
                 <div>
-                  <div id="card-flyer" className="card">
+                  <div
+                    id="card-flyer"
+                    className="card border-0 MobilePhones-card"
+                  >
                     <div id="image-box" className="">
                       <img
                         src={product.image}
@@ -83,8 +87,9 @@ const MobilePhones = () => {
                         </p>
 
                         <i
+                          role="button"
                           onClick={() => addToCart(product)}
-                          className="bi bi-plus-square fs-5 text-danger btn "
+                          className="bi bi-plus-square fs-5 text-danger btn add-to-cart-icon"
                         ></i>
                       </div>
                     </div>
