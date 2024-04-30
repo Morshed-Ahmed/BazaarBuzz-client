@@ -1,15 +1,21 @@
 import { useEffect, useState } from "react";
+import { Spinner } from "react-bootstrap";
 
 const Profile = () => {
   const [user, setUser] = useState("");
   const [payProducts, setPayProducts] = useState([]);
   // const [payProductsItem, setPayProductsItem] = useState([]);
+  const [loading, setLoading] = useState(true);
+  const [profileLoading, setProfileLoading] = useState(true);
 
   useEffect(() => {
     const user_id = localStorage.getItem("user_id");
     fetch(`https://bazaar-buzz.onrender.com/auth/userdata/${user_id}`)
       .then((res) => res.json())
-      .then((data) => setUser(data));
+      .then((data) => {
+        setUser(data);
+        setProfileLoading(false);
+      });
   }, []);
 
   useEffect(() => {
@@ -17,6 +23,7 @@ const Profile = () => {
       .then((response) => response.json())
       .then((data) => {
         setPayProducts(data);
+        setLoading(false);
       })
       .catch((error) => console.error("Error fetching products:", error));
   }, [user.email]);
@@ -28,15 +35,21 @@ const Profile = () => {
   return (
     <div className="container my-5">
       <div className="card mb-3 w-50 mx-auto">
-        <div className="card-body">
-          <h4 className="text-center">Personal Information</h4>
-          <h5>Username</h5>
-          <p>
-            {user.first_name} {user.last_name}
-          </p>
-          <h5>Email</h5>
-          <p>{user.email}</p>
-        </div>
+        {profileLoading ? (
+          <div className="text-center">
+            <Spinner animation="border" />
+          </div>
+        ) : (
+          <div className="card-body">
+            <h4 className="text-center">Personal Information</h4>
+            <h5>Username</h5>
+            <p>
+              {user.first_name} {user.last_name}
+            </p>
+            <h5>Email</h5>
+            <p>{user.email}</p>
+          </div>
+        )}
       </div>
       <div className="card">
         <div className="card-body">
@@ -54,9 +67,15 @@ const Profile = () => {
               ))}
             </>
           ) : (
-            <>
+            <div>
               <p>Empty</p>
-            </>
+            </div>
+          )}
+
+          {loading && (
+            <div className="text-center">
+              <Spinner animation="border" />
+            </div>
           )}
         </div>
       </div>

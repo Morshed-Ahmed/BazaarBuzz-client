@@ -2,8 +2,12 @@ import { useEffect, useState } from "react";
 import toast from "react-hot-toast";
 import { Link } from "react-router-dom";
 import "./MobilePhones.css";
+import { OverlayTrigger, Spinner, Tooltip } from "react-bootstrap";
+import { useAuth } from "../../../Context/AuthContext";
 
 const MobilePhones = () => {
+  const { isLoggedIn } = useAuth();
+
   const [data, setData] = useState([]);
   useEffect(() => {
     fetch(
@@ -49,57 +53,87 @@ const MobilePhones = () => {
   return (
     <div>
       <h4>Mobile Phones</h4>
-      <div className="row row-cols-1 row-cols-md-3 g-4">
-        {data.map((product) => (
-          <div className="col " key={product.id}>
-            <div>
-              <div className="p-1">
+      {data.length ? (
+        <>
+          <div className="row row-cols-1 row-cols-md-3 g-4">
+            {data.map((product) => (
+              <div className="col " key={product.id}>
                 <div>
-                  <div
-                    id="card-flyer"
-                    className="card border-0 MobilePhones-card"
-                  >
-                    <div id="image-box" className="">
-                      <img
-                        src={product.image}
-                        className="card-img-top"
-                        alt={product.name}
-                      />
-                    </div>
+                  <div className="p-1">
+                    <div>
+                      <div
+                        id="card-flyer"
+                        className="card border-0 MobilePhones-card"
+                      >
+                        <div id="image-box" className="">
+                          <img
+                            src={product.image}
+                            className="card-img-top"
+                            alt={product.name}
+                          />
+                        </div>
 
-                    <div className="card-body">
-                      <Link to={`/products/${product.id}`}>
-                        <h5 id="ss" className="card-title fs-6">
-                          {product.name}
-                        </h5>
-                      </Link>
+                        <div className="card-body">
+                          <Link to={`/products/${product.id}`}>
+                            <h5 id="ss" className="card-title fs-6">
+                              {product.name}
+                            </h5>
+                          </Link>
 
-                      <div className="d-flex">
-                        <i className="bi bi-star text-warning"></i>
-                        <i className="bi bi-star text-warning"></i>
-                        <i className="bi bi-star text-warning"></i>
-                        <i className="bi bi-star text-warning"></i>
-                        <i className="bi bi-star text-warning"></i>
-                      </div>
-                      <div className="d-flex justify-content-between">
-                        <p className="card-text text-danger">
-                          $ {product.price}
-                        </p>
+                          <div className="d-flex">
+                            <i className="bi bi-star text-warning"></i>
+                            <i className="bi bi-star text-warning"></i>
+                            <i className="bi bi-star text-warning"></i>
+                            <i className="bi bi-star text-warning"></i>
+                            <i className="bi bi-star text-warning"></i>
+                          </div>
+                          <div className="d-flex justify-content-between">
+                            <p className="card-text text-danger">
+                              $ {product.price}
+                            </p>
 
-                        <i
-                          role="button"
-                          onClick={() => addToCart(product)}
-                          className="bi bi-plus-square fs-5 text-danger btn add-to-cart-icon"
-                        ></i>
+                            {isLoggedIn ? (
+                              <>
+                                <i
+                                  role="button"
+                                  onClick={() => addToCart(product)}
+                                  className="bi bi-plus-square fs-5 text-danger btn add-to-cart-icon"
+                                ></i>
+                              </>
+                            ) : (
+                              <>
+                                <Link to={"/login"}>
+                                  <OverlayTrigger
+                                    placement="bottom"
+                                    overlay={
+                                      <Tooltip id={`tooltip-bottom`}>
+                                        Please Login.
+                                      </Tooltip>
+                                    }
+                                  >
+                                    <i
+                                      role="button"
+                                      className="bi bi-plus-square fs-5 text-danger btn add-to-cart-icon"
+                                    ></i>
+                                  </OverlayTrigger>
+                                </Link>
+                              </>
+                            )}
+                          </div>
+                        </div>
                       </div>
                     </div>
                   </div>
                 </div>
               </div>
-            </div>
+            ))}
           </div>
-        ))}
-      </div>
+        </>
+      ) : (
+        <div className="text-center">
+          <Spinner animation="border" />;
+        </div>
+      )}
     </div>
   );
 };

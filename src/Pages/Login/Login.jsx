@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { Button, Form } from "react-bootstrap";
-import { Link } from "react-router-dom";
+import { Link, Navigate, useNavigate } from "react-router-dom";
 import { useAuth } from "../../Context/AuthContext";
 import toast from "react-hot-toast";
 
@@ -10,6 +10,8 @@ function Login() {
   const [error, setError] = useState(null);
   const [loading, setLoading] = useState(false);
   // const [token, setToken] = useState(null);
+
+  const navigate = useNavigate();
 
   const { setIsLoggedIn } = useAuth();
 
@@ -29,13 +31,16 @@ function Login() {
         }
       );
 
-      if (!response.ok) {
-        throw new Error("Invalid credentials");
-      }
+      // console.log(response);
 
       const responseData = await response.json();
       const authToken = responseData.token;
-      console.log(responseData);
+      // console.log(responseData);
+
+      if (responseData.error) {
+        toast.error("Invalid credentials");
+        throw new Error("Invalid credentials");
+      }
 
       localStorage.setItem("token", authToken);
       localStorage.setItem("user_id", responseData.user_id);
@@ -43,7 +48,9 @@ function Login() {
       setUsername("");
       setPassword("");
       setIsLoggedIn(true);
-      window.location.href = "/profile";
+      // window.location.href = "/profile";
+      navigate("/profile");
+
       // alert("Login successful");
       toast.success("Login successful");
     } catch (error) {

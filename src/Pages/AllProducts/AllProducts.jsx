@@ -1,11 +1,15 @@
 import { useEffect, useState } from "react";
+import { OverlayTrigger, Tooltip } from "react-bootstrap";
 import toast from "react-hot-toast";
 import { Link, useParams } from "react-router-dom";
+import { useAuth } from "../../Context/AuthContext";
 
 const AllProducts = () => {
   const [products, setProducts] = useState([]);
   const [priceFilter, setPriceFilter] = useState("");
   const [loading, setLoading] = useState(false);
+
+  const { isLoggedIn } = useAuth();
 
   const [kk, setKk] = useState("");
 
@@ -239,10 +243,31 @@ const AllProducts = () => {
                                     $ {product.price}
                                   </p>
 
-                                  <i
-                                    onClick={() => addToCart(product)}
-                                    className="bi bi-plus-square fs-5 text-danger btn "
-                                  ></i>
+                                  {isLoggedIn ? (
+                                    <>
+                                      <i
+                                        role="button"
+                                        onClick={() => addToCart(product)}
+                                        className="bi bi-plus-square fs-5 text-danger btn add-to-cart-icon"
+                                      ></i>
+                                    </>
+                                  ) : (
+                                    <Link to={"/login"}>
+                                      <OverlayTrigger
+                                        placement="bottom"
+                                        overlay={
+                                          <Tooltip id={`tooltip-bottom`}>
+                                            Please Login.
+                                          </Tooltip>
+                                        }
+                                      >
+                                        <i
+                                          role="button"
+                                          className="bi bi-plus-square fs-5 text-danger btn add-to-cart-icon"
+                                        ></i>
+                                      </OverlayTrigger>
+                                    </Link>
+                                  )}
                                 </div>
                               </div>
                             </div>

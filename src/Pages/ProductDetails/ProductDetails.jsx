@@ -221,15 +221,26 @@
 
 // export default ProductDetails;
 
-import { Alert, Button, Col, Form, ListGroup, Tab } from "react-bootstrap";
+import {
+  Alert,
+  Button,
+  Col,
+  Form,
+  ListGroup,
+  OverlayTrigger,
+  Tab,
+  Tooltip,
+} from "react-bootstrap";
 import toast from "react-hot-toast";
 import { useParams } from "react-router-dom";
 import ReviewStars from "../../Components/ReviewStars";
 import DateTimeConverter from "../../Components/DateTimeConverter";
 import { useEffect, useState } from "react";
 import RelatedProducts from "./RelatedProducts";
+import { useAuth } from "../../Context/AuthContext";
 
 const ProductDetails = () => {
+  const { isLoggedIn } = useAuth();
   const { id } = useParams();
   const [products, setProducts] = useState([]);
   const [cartItems, setCartItems] = useState(() => {
@@ -445,12 +456,28 @@ const ProductDetails = () => {
                 <span>Stock Available</span>
                 <br />
                 <br />
-                <button
-                  onClick={() => addToCart(products)}
-                  className="btn btn-danger"
-                >
-                  Add To Cart
-                </button>
+
+                {isLoggedIn ? (
+                  <>
+                    <button
+                      onClick={() => addToCart(products)}
+                      className="btn btn-danger"
+                    >
+                      Add To Cart
+                    </button>
+                  </>
+                ) : (
+                  <>
+                    <OverlayTrigger
+                      placement="bottom"
+                      overlay={
+                        <Tooltip id={`tooltip-bottom`}>Please Login.</Tooltip>
+                      }
+                    >
+                      <Button variant="danger">Add To Cart</Button>
+                    </OverlayTrigger>
+                  </>
+                )}
               </div>
             </div>
           </div>

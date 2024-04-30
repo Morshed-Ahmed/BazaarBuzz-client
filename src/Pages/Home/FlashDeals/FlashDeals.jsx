@@ -3,8 +3,11 @@ import "./FlashDeals.css";
 import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import toast from "react-hot-toast";
+import { OverlayTrigger, Tooltip } from "react-bootstrap";
+import { useAuth } from "../../../Context/AuthContext";
 
 const FlashDeals = () => {
+  const { isLoggedIn } = useAuth();
   const [products, setProducts] = useState([]);
   const [cartItems, setCartItems] = useState(() => {
     const storedCart = localStorage.getItem("cart");
@@ -128,10 +131,31 @@ const FlashDeals = () => {
                           $ {product.price}
                         </p>
 
-                        <i
-                          onClick={() => addToCart(product)}
-                          className="bi bi-plus-square fs-5 text-danger btn add-to-cart-icon"
-                        ></i>
+                        {isLoggedIn ? (
+                          <>
+                            <i
+                              role="button"
+                              onClick={() => addToCart(product)}
+                              className="bi bi-plus-square fs-5 text-danger btn add-to-cart-icon"
+                            ></i>
+                          </>
+                        ) : (
+                          <Link to={"/login"}>
+                            <OverlayTrigger
+                              placement="bottom"
+                              overlay={
+                                <Tooltip id={`tooltip-bottom`}>
+                                  Please Login.
+                                </Tooltip>
+                              }
+                            >
+                              <i
+                                role="button"
+                                className="bi bi-plus-square fs-5 text-danger btn add-to-cart-icon"
+                              ></i>
+                            </OverlayTrigger>
+                          </Link>
+                        )}
                       </div>
                     </div>
                   </div>
